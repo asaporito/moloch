@@ -19,5 +19,4 @@ RUN wget http://download.elastic.co/elasticsearch/release/org/elasticsearch/dist
 	http://files.molo.ch/builds/centos-7/moloch-0.18.3-1.x86_64.rpm
 RUN yum -y localinstall elasticsearch-2.4.0.rpm  \
 	moloch-0.18.3-1.x86_64.rpm
-RUN echo *                -      nofile          128000 >> /etc/security/limits.conf
-RUN echo *                -      memlock         unlimited >> /etc/security/limits.conf
+
