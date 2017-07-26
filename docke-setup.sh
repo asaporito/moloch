@@ -1,4 +1,3 @@
-#!/bin/bash
 sudo docker pull asaporito/moloch
 sudo docker run --rm --privileged -v /:/host asaporito/moloch setup
 sudo docker run -d --net="host" --name moloch --security-opt seccomp=unconfined --tmpfs /run -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /home/pcasStorage:/data/moloch/raw -t asaporito/moloch
