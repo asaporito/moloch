@@ -28,9 +28,18 @@ RUN echo 'systemctl enable elasticsearch.service' >> moloch-setup.sh
 RUN echo 'systemctl status elasticsearch.service' >> moloch-setup.sh
 RUN echo '/data/moloch/bin/Configure' >> moloch-setup.sh
 RUN echo '/data/moloch/db/db.pl http://localhost:9200 init' >> moloch-setup.sh
+RUN echo '#!/bin/sh' >> moloch-setup.sh
+RUN echo if [ -z "$MOLOCH_INTERFACE" ]; then >> moloch-setup.sh
+RUN echo    'echo -n "Found interfaces: "' >> moloch-setup.sh
+RUN echo    '/sbin/ifconfig | grep "^[a-z]" | cut -d: -f1 | cut -d" " -f1 | paste -s -d>> moloch-setup.sh
+RUN echo    'echo -n "Semicolon ';' seperated list of interfaces to monitor one more time to disable some network card features:  "' >> moloch-setup.sh
+RUN echo    'read -r MOLOCH_INTERFACE' >> moloch-setup.sh
+RUN echo    'ethtool -K $MOLOCH_INTERFACE tx off sg off gro off gso off lro off tso off' >> moloch-setup.sh
+RUN echo    'echo $MOLOCH_INTERFACE' >> moloch-setup.sh
 RUN echo '/data/moloch/bin/moloch_add_user.sh admin admin admin --admin' >> moloch-setup.sh
 RUN echo 'systemctl start molochcapture.service' >> moloch-setup.sh
 RUN echo 'systemctl start molochviewer.service' >> moloch-setup.sh
 RUN echo 'systemctl status molochcapture.service' >> moloch-setup.sh
 RUN echo 'systemctl status molochviewer.service' >> moloch-setup.sh
 RUN echo 'echo setup is now complete please go to http://localhost:8005 and the username and password is admin.' >> moloch-setup.sh
+RUN echo 'echo Make sure ethtool -K INTERFACE tx off sg off gro off gso off lro off tso off was ran on the host machine during primary installation. If not please run the command.' >> moloch-setup.sh
