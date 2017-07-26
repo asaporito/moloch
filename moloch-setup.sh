@@ -5,6 +5,14 @@ echo 'systemctl enable elasticsearch.service' >> moloch-setup.sh
 echo 'systemctl status elasticsearch.service' >> moloch-setup.sh
 echo '/data/moloch/bin/Configure' >> moloch-setup.sh
 echo '/data/moloch/db/db.pl http://localhost:9200 init' >> moloch-setup.sh
+echo '#!/bin/sh' >> moloch-setup.sh
+echo if [ -z "$MOLOCH_INTERFACE" ]; then >> moloch-setup.sh
+echo    'echo -n "Found interfaces: "' >> moloch-setup.sh
+echo    '/sbin/ifconfig | grep "^[a-z]" | cut -d: -f1 | cut -d" " -f1 | paste -s -d>> moloch-setup.sh
+echo    'echo -n "Semicolon ';' seperated list of interfaces to monitor one more time to disable some network card features:  "' >> moloch-setup.sh
+echo    'read -r MOLOCH_INTERFACE' >> moloch-setup.sh
+echo    'ethtool -K $MOLOCH_INTERFACE tx off sg off gro off gso off lro off tso off' >> moloch-setup.sh
+echo    'echo $MOLOCH_INTERFACE' >> moloch-setup.sh
 echo '/data/moloch/bin/moloch_add_user.sh admin admin admin --admin' >> moloch-setup.sh
 echo 'systemctl start molochcapture.service' >> moloch-setup.sh
 echo 'systemctl start molochviewer.service' >> moloch-setup.sh
