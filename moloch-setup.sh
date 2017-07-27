@@ -13,6 +13,7 @@ echo    'echo -n "Semicolon ';' seperated list of interfaces to monitor one more
 echo    'read -r MOLOCH_INTERFACE' >> moloch-setup.sh
 echo    'ethtool -K $MOLOCH_INTERFACE tx off sg off gro off gso off lro off tso off' >> moloch-setup.sh
 echo    'echo $MOLOCH_INTERFACE' >> moloch-setup.sh
+echo fi >> moloch-setup.sh
 echo '/data/moloch/bin/moloch_add_user.sh admin admin admin --admin' >> moloch-setup.sh
 echo 'systemctl start molochcapture.service' >> moloch-setup.sh
 echo 'systemctl start molochviewer.service' >> moloch-setup.sh
