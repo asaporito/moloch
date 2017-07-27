@@ -1,9 +1,8 @@
 sudo docker pull asaporito/moloch
 sudo docker run --rm --privileged -v /:/host asaporito/moloch setup
 sudo docker run -d --net="host" --name moloch --security-opt seccomp=unconfined --tmpfs /run -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /home/pcasStorage:/data/moloch/raw -t asaporito/moloch
-echo '*'                -      nofile          128000
-echo '*'                -      memlock         unlimited 
-sudo docker exec -it moloch /bin/bash
+sudo echo '*'                -      nofile          128000 >> /etc/security/limits.conf
+sudo echo '*'                -      memlock         unlimited >> /etc/security/limits.conf
  if [ -z "$MOLOCH_INTERFACE" ]; then 
    echo -n "Found interfaces: "
    /sbin/ifconfig | grep "^[a-z]" | cut -d: -f1 | cut -d" " -f1 | paste -s -d
@@ -12,4 +11,4 @@ sudo docker exec -it moloch /bin/bash
    ethtool -K $MOLOCH_INTERFACE tx off sg off gro off gso off lro off tso off
    echo $MOLOCH_INTERFACE
  fi
-
+sudo docker exec -it moloch /bin/bash
