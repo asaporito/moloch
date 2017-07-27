@@ -29,7 +29,7 @@ RUN echo 'systemctl status elasticsearch.service' >> moloch-setup.sh
 RUN echo '/data/moloch/bin/Configure' >> moloch-setup.sh
 RUN echo '/data/moloch/db/db.pl http://localhost:9200 init' >> moloch-setup.sh
 RUN echo '#!/bin/sh' >> moloch-setup.sh
-RUN echo if [ -z "$MOLOCH_INTERFACE" ]; then >> moloch-setup.sh
+RUN echo 'if [ -z "$MOLOCH_INTERFACE" ]; then' >> moloch-setup.sh
 RUN echo    'echo -n "Found interfaces: "' >> moloch-setup.sh
 RUN echo    '/sbin/ifconfig | grep "^[a-z]" | cut -d: -f1 | cut -d" " -f1 | paste -s -d ";" >> moloch-setup.sh
 RUN echo    'echo -n "Semicolon ';' seperated list of interfaces to monitor one more time to disable some network card features:  "' >> moloch-setup.sh
