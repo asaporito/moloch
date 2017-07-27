@@ -4,7 +4,7 @@ sudo docker run -d --net="host" --name moloch --security-opt seccomp=unconfined 
 sudo echo '*'                -      nofile          128000 >> /etc/security/limits.conf
 sudo echo '*'                -      memlock         unlimited >> /etc/security/limits.conf
  if [ -z "$MOLOCH_INTERFACE" ]; then 
-   echo -n "Found interfaces: " /sbin/ifconfig | grep "^[a-z]" | cut -d: -f1 | cut -d" " -f1 | paste -s -d";"
+   ip addr show
    echo -n "Semicolon ';' seperated list of interfaces that you will be monitoring with Moloch "
    read -r MOLOCH_INTERFACE
    sudo ethtool -K $MOLOCH_INTERFACE tx off sg off gro off gso off lro off tso off
