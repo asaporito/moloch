@@ -28,6 +28,7 @@ RUN echo 'systemctl enable elasticsearch.service' >> moloch-setup.sh
 RUN echo 'systemctl status elasticsearch.service' >> moloch-setup.sh
 RUN echo '/data/moloch/bin/Configure' >> moloch-setup.sh
 RUN echo '/data/moloch/db/db.pl http://localhost:9200 init' >> moloch-setup.sh
+
 RUN echo '#!/bin/sh' >> moloch-setup.sh
 RUN echo 'if [ -z "$MOLOCH_INTERFACE" ]; then' >> moloch-setup.sh
 RUN echo    'echo -n "Found interfaces: "' >> moloch-setup.sh
@@ -52,4 +53,7 @@ RUN echo 'baseurl=http://packages.elastic.co/kibana/4.5/centos' >> /etc/yum.repo
 RUN echo 'gpgcheck=1' >> /etc/yum.repos.d/kibana.repo
 RUN echo 'gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch' >> /etc/yum.repos.d/kibana.repo
 RUN echo 'enabled=1' >> /etc/yum.repos.d/kibana.repo
+RUN echo 'systemctl start kibana' >> /etc/yum.repos.d/kibana.repo
+RUN echo 'systemctl status kibana' >> /etc/yum.repos.d/kibana.repo
 RUN yum -y install kibana
+
