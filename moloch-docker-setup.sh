@@ -5,7 +5,7 @@ sudo echo '*'                -      nofile          128000 >> /etc/security/limi
 sudo echo '*'                -      memlock         unlimited >> /etc/security/limits.conf
  if [ -z "$MOLOCH_INTERFACE" ]; then 
    ip addr show
-   echo -n "Semicolon ';' seperated list of interfaces that you will be monitoring with Moloch "
+   echo -n "The interfaces that you will be monitoring with Moloch "
    read -r MOLOCH_INTERFACE
    sudo ethtool -K $MOLOCH_INTERFACE tx off sg off gro off gso off lro off tso off
    echo $MOLOCH_INTERFACE
