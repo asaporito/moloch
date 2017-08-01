@@ -1,4 +1,4 @@
-sudo docker pull asaporito/moloch-kibanag
+sudo docker pull asaporito/moloch-kibana
 sdocker run -d --net="host" --name moloch-kibana --security-opt seccomp=unconfined --tmpfs /run -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /home/pcasStorage:/data/moloch/raw -t asaporito/moloch-kibana
 sudo echo '*'                -      nofile          128000 >> /etc/security/lim$
 sudo echo '*'                -      memlock         unlimited >> /etc/security/$
