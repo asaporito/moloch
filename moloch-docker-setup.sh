@@ -1,5 +1,5 @@
 sudo docker pull asaporito/moloch
-sudo docker run --rm --privileged -v /:/host asaporito/moloch setup
+docker run -d --net="host" --name moloch --security-opt seccomp=unconfined --tmpfs /run -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /home/pcasStorage:/data/moloch/raw -t asaporito/moloch
 sudo docker run -d --net="host" --name moloch --security-opt seccomp=unconfined$
 sudo echo '*'                -      nofile          128000 >> /etc/security/lim$
 sudo echo '*'                -      memlock         unlimited >> /etc/security/$
