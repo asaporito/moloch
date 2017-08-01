@@ -53,7 +53,7 @@ RUN echo 'baseurl=http://packages.elastic.co/kibana/4.5/centos' >> /etc/yum.repo
 RUN echo 'gpgcheck=1' >> /etc/yum.repos.d/kibana.repo
 RUN echo 'gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch' >> /etc/yum.repos.d/kibana.repo
 RUN echo 'enabled=1' >> /etc/yum.repos.d/kibana.repo
-RUN echo 'systemctl start kibana' >> /etc/yum.repos.d/kibana.repo
-RUN echo 'systemctl status kibana' >> /etc/yum.repos.d/kibana.repo
+RUN echo 'systemctl start kibana' >> moloch-setup.sh
+RUN echo 'systemctl status kibana' >> moloch-setup.sh
 RUN yum -y install kibana
 
