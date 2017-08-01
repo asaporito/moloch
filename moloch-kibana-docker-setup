@@ -1,6 +1,5 @@
 sudo docker pull asaporito/moloch-kibanag
 sdocker run -d --net="host" --name moloch-kibana --security-opt seccomp=unconfined --tmpfs /run -v /sys/fs/cgroup:/sys/fs/cgroup:ro -v /home/pcasStorage:/data/moloch/raw -t asaporito/moloch-kibana
-sudo docker run -d --net="host" --name moloch-kibana --security-opt seccomp=unconfined$
 sudo echo '*'                -      nofile          128000 >> /etc/security/lim$
 sudo echo '*'                -      memlock         unlimited >> /etc/security/$
  if [ -z "$MOLOCH_INTERFACE" ]; then 
